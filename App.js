@@ -4,11 +4,12 @@ import { StyleSheet, Text, View, ActivityIndicator } from "react-native"
 import * as Location from "expo-location"
 
 import { fetchWeatherReport } from "./services/weather"
-import { colors } from "./utils"
+import { colors } from "./utils/colors"
 
 import WeatherInfo from "./components/WeatherInfo"
 import UnitsPicker from "./components/UnitsPicker"
 import ReloadIcon from "./components/ReloadIcon"
+import WeatherDetails from "./components/WeatherDetails"
 
 export default function App() {
 	const [errorMessage, setErrorMessage] = useState(null)
@@ -66,12 +67,20 @@ export default function App() {
 						currentWeather={currentWeather}
 					/>
 				</View>
+
+				<View>
+					<WeatherDetails
+						currentWeather={currentWeather}
+						unitSystem={unitSystem}
+					/>
+				</View>
 			</View>
 		)
 	} else if (errorMessage) {
 		return (
 			<View style={styles.container}>
-				<Text>{errorMessage}</Text>
+				<ReloadIcon load={load} />
+				<Text style={{ textAlign: "center" }}>{errorMessage}</Text>
 				<StatusBar style="auto" />
 			</View>
 		)

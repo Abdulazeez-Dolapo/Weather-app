@@ -1,6 +1,8 @@
 import React from "react"
 import { View, Text, StyleSheet, Image } from "react-native"
-import { colors } from "../utils"
+
+import { colors } from "../utils/colors"
+import { getIconForUnit } from "../utils/helpers"
 
 const { PRIMARY_COLOR, SECONDARY_COLOR } = colors
 
@@ -14,19 +16,13 @@ export default function WeatherInfo({ currentWeather, unitSystem }) {
 	const { icon, main, description } = details
 	const iconUrl = `https://openweathermap.org/img/wn/${icon}@4x.png`
 
-	const getIconForUnit = () => {
-		if (unitSystem === "metric") return "C"
-		if (unitSystem === "imperial") return "F"
-		if (unitSystem === "kelvin") return "K"
-	}
-
 	return (
 		<View style={styles.weatherInfo}>
 			<Text>{name}</Text>
 			<Image style={styles.icon} source={{ uri: iconUrl }} />
 			<Text style={styles.textPrimary}>
 				{temp}&#176;
-				{getIconForUnit()}
+				{getIconForUnit(unitSystem)}
 			</Text>
 			<Text style={styles.description}>{description}</Text>
 			<Text style={styles.textSecondary}>{main}</Text>

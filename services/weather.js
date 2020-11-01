@@ -1,6 +1,8 @@
-const WEATHER_API_KEY = "87e8a9b28ffd5b17659cc75070597a22"
+import { WEATHER_API_KEY } from "react-native-dotenv"
+
 const BASE_URL = `https://api.openweathermap.org/data/2.5/weather?`
 
+console.log({ WEATHER_API_KEY })
 export const fetchWeatherReport = queryParams => {
 	return fetch(`${BASE_URL}${queryParams}&appid=${WEATHER_API_KEY}`)
 }
